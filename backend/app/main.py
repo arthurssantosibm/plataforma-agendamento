@@ -1,17 +1,21 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="API de Teste")
+app = FastAPI(title="Plataforma de Agendamento")
 
-# Permitir requisições de qualquer origem (CORS)
+# CORS (permite HTML acessar a API)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # para produção, coloque apenas os domínios que você vai usar
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-@app.get("/health")
+@app.get("/users")
 def health():
-    return {"status": "ok", "message": "API funcionando!"}
+    return {"status": "API rodando"}
+
+from app.api.users import router as users_router
+
+app.include_router(users_router)

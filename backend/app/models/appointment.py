@@ -14,4 +14,11 @@ class Appointment(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
     client = relationship("User", back_populates="appointments")
-    services = relationship("AppointmentService", back_populates="appointment")
+    
+    # ⚠️ AJUSTE AQUI: O relacionamento com a tabela de associação
+    services = relationship(
+        "AppointmentService", 
+        back_populates="appointment",
+        # Configuração para que, ao carregar um Agendamento, os serviços venham juntos
+        cascade="all, delete-orphan" 
+    )
