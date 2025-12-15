@@ -1,32 +1,16 @@
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
+from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI()
+app = FastAPI(title="API de Teste")
 
-@app.get("/")
-def index():
-    return HTMLResponse("""
-    <!DOCTYPE html>
-    <html>
-    <head><title>Teste API</title></head>
-    <body>
-    <h1>Teste de Conexão</h1>
-    <button onclick="testAPI()">Testar API</button>
-    <pre id="result"></pre>
-    <script>
-    async function testAPI() {
-        try {
-            const res = await fetch('/health');
-            const data = await res.json();
-            document.getElementById('result').innerText = JSON.stringify(data, null, 2);
-        } catch(e) {
-            document.getElementById('result').innerText = e;
-        }
-    }
-    </script>
-    </body>
-    </html>
-    """)
+# Permitir requisições de qualquer origem (CORS)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # para produção, coloque apenas os domínios que você vai usar
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/health")
 def health():
