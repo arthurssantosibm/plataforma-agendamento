@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste API</title>
+</head>
+<body>
+
+<h1>Teste de Conexão</h1>
+<button onclick="testAPI()">Testar API</button>
+
+<pre id="result"></pre>
+
+<script>
+const API_URL = "http://localhost:8000";
+
+async function apiRequest(endpoint, method = "GET", body = null) {
+    const options = {
+        method,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+
+    if (body) {
+        options.body = JSON.stringify(body);
+    }
+
+    const response = await fetch(`${API_URL}${endpoint}`, options);
+    return response.json();
+}
+
+async function testAPI() {
+    try {
+        const data = await apiRequest("/health");
+        document.getElementById("result").innerText = JSON.stringify(data, null, 2);
+    } catch (error) {
+        document.getElementById("result").innerText = "Erro: " + error;
+        console.error(error);
+    }
+}
+</script>
+
+</body>
+</html>
