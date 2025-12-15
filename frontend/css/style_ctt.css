@@ -1,0 +1,191 @@
+/* ======================================= */
+/* 1. REGRAS GLOBAIS E TEMA ESCURO (CRUCIAL PARA A PÁGINA TODA) */
+/* ======================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+/* Configuração do Tema Escuro para toda a página */
+html {
+    background-color: #121212; /* Garante que o fundo da página (root) seja escuro */
+}
+
+body {
+    background-color: #121212; /* Fundo escuro principal */
+    color: #E0E0E0; /* Cor do texto principal (claro) */
+    line-height: 1.6;
+    min-height: 100vh; /* CRUCIAL: Garante que o body ocupe a altura total da tela */
+    display: flex; 
+    flex-direction: column;
+}
+
+/* --- Cabeçalho (Header) --- */
+header {
+    background-color: #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    border-bottom: 2px solid #FFD700;
+}
+
+.logo img {
+    height: 50px;
+}
+
+/* --- Navegação (Nav) --- */
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #E0E0E0;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #000000;
+    background-color: #FFD700;
+    border-radius: 5px;
+}
+
+/* --- Conteúdo Principal (.principal) --- */
+/* Garante que a área de conteúdo se estique verticalmente */
+.principal {
+    flex-grow: 1; 
+    padding: 40px 5%;
+    text-align: center;
+}
+
+
+/* ======================================= */
+/* 2. ESTILOS ESPECÍFICOS DA PÁGINA DE CONTATO */
+/* ======================================= */
+
+.contato-page {
+    max-width: 1200px;
+    width: 100%;
+    margin: 40px auto;
+    text-align: left;
+}
+
+.contato-page h1 {
+    text-align: center;
+}
+
+.contato-page .subtitle {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.contact-container {
+    display: flex;
+    width: 90%;
+    gap: 30px;
+    padding: 20px;
+    background-color: #1E1E1E;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.contact-form-section,
+.contact-info-section {
+    flex: 1;
+    width: 100%;
+    padding: 20px;
+    border-radius: 6px;
+    background-color: #121212;
+}
+
+.contact-form-section h2,
+.contact-info-section h2 {
+    color: #FFD700;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #333333;
+    padding-bottom: 10px;
+}
+
+/* --- Estilização do Formulário --- */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #E0E0E0;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #333333;
+    background-color: #2a2a2a;
+    color: #E0E0E0;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+    border-color: #FFD700;
+    outline: none;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+/* --- Estilização das Informações --- */
+.info-block {
+    margin-bottom: 20px;
+    padding: 10px 0;
+}
+
+.info-block h3 {
+    color: #BB86FC;
+    margin-bottom: 5px;
+}
+
+.social-media a {
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.social-media a:hover {
+    color: #E0E0E0;
+}
+
+/* Estilização do Iframe do Mapa */
+.map-embed iframe {
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+/* Media Query para telas menores (Responsividade) */
+@media (max-width: 900px) {
+    .contact-container {
+        flex-direction: column;
+    }
+}
