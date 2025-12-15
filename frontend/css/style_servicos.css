@@ -1,0 +1,159 @@
+/* ======================================= */
+/* 1. REGRAS GLOBAIS E TEMA ESCURO (CRUCIAL PARA A PÁGINA TODA) */
+/* ======================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+/* Configuração do Tema Escuro para toda a página */
+html {
+    background-color: #121212; /* Garante que o fundo da página (root) seja escuro */
+}
+
+body {
+    background-color: #121212; /* Fundo escuro principal */
+    color: #E0E0E0; /* Cor do texto principal (claro) */
+    line-height: 1.6;
+    min-height: 100vh; /* CRUCIAL: Garante que o body ocupe a altura total da tela */
+    display: flex; 
+    flex-direction: column;
+}
+
+/* --- Cabeçalho (Header) --- */
+header {
+    background-color: #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    border-bottom: 2px solid #FFD700;
+}
+
+.logo img {
+    height: 50px;
+}
+
+/* --- Navegação (Nav) --- */
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #E0E0E0;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #000000;
+    background-color: #FFD700;
+    border-radius: 5px;
+}
+
+/* --- Conteúdo Principal (.principal) --- */
+/* Garante que a área de conteúdo se estique verticalmente */
+.principal {
+    flex-grow: 1; 
+    padding: 40px 5%;
+    text-align: center;
+}
+
+/* ======================================= */
+/* 2. ESTILOS ESPECÍFICOS DA PÁGINA DE SERVIÇOS */
+/* ======================================= */
+
+.servicos-page {
+    /* Centraliza e limita a largura da área de conteúdo principal */
+    max-width: 1200px; 
+    margin: 40px auto; 
+}
+
+.services-grid-container {
+    display: grid;
+    /* Layout responsivo: 3 colunas em telas grandes, ou autoajuste */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    text-align: center;
+}
+
+.service-card {
+    background-color: #1E1E1E; /* Fundo cinza escuro */
+    padding: 30px 20px;
+    border-radius: 8px;
+    border: 1px solid #333333;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(255, 215, 0, 0.2); 
+}
+
+/* Cartão de Destaque (Combo Completo) */
+.service-card.highlight {
+    background-color: #2a2a2a; 
+    border-color: #FFD700; 
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+.service-title {
+    color: #FFD700;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.service-description {
+    color: #AAAAAA;
+    margin-bottom: 15px;
+    font-size: 0.95em;
+    flex-grow: 1; 
+}
+
+.service-price {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #BB86FC;
+    margin-bottom: 20px;
+}
+
+/* Botão de Agendar */
+.agendar-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    background-color: #FFD700;
+    color: #121212;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    text-transform: uppercase;
+}
+
+.agendar-btn:hover {
+    background-color: #BB86FC;
+}
+
+/* Media Query: Em telas menores, o grid se ajustará automaticamente */
+@media (max-width: 650px) {
+    .services-grid-container {
+        padding: 10px;
+        gap: 20px;
+    }
+}
