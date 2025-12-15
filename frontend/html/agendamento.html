@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style_agenda.css">
+    <title>Agendamento | Barbearia XYZ</title>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="index.html"><img src="../img/logo.png" alt="Logo da Barbearia"></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="servicos.html">Serviços</a></li>
+            <li><a href="agendamento.html">Agendamento</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="principal agendamento-page">
+    <h1>🗓️ Agende Seu Horário</h1>
+    <p class="subtitle">Selecione o dia e o horário perfeito para cuidar do seu estilo.</p>
+
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button id="prev-month" class="nav-button">←</button>
+            <h2 id="current-month-year">Dezembro 2025</h2>
+            <button id="next-month" class="nav-button">→</button>
+        </div>
+
+        <div class="calendar-weekdays">
+            <span>Dom</span>
+            <span>Seg</span>
+            <span>Ter</span>
+            <span>Qua</span>
+            <span>Qui</span>
+            <span>Sex</span>
+            <span>Sáb</span>
+        </div>
+
+        <div class="calendar-grid" id="calendar-grid">
+            <div class="day day-off"></div>
+            <div class="day day-available" data-date="2025-12-01">1</div>
+            <div class="day day-available" data-date="2025-12-02">2</div>
+            <div class="day day-available" data-date="2025-12-15">15</div>
+            <div class="day day-available today" data-date="2025-12-16">16</div>
+            <div class="day day-unavailable" data-date="2025-12-17">17</div>
+            </div>
+    </div>
+</main>
+
+<div id="appointment-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Agendar em <span id="selected-date-display">15/12</span></h2>
+
+        <div class="modal-section">
+            <h3>1. Escolha o Serviço</h3>
+            <select id="service-select">
+                <option value="0">Selecione um Serviço</option>
+                <option value="corte">Corte Clássico - R$ 50,00</option>
+                <option value="barba">Barba Tradicional - R$ 40,00</option>
+                <option value="completo">Corte + Barba - R$ 85,00</option>
+            </select>
+        </div>
+        
+        <div class="modal-section">
+            <h3>2. Horários Disponíveis</h3>
+            <div id="available-times" class="time-slots">
+                <button class="time-slot" data-time="09:00">09:00</button>
+                <button class="time-slot" data-time="10:30">10:30</button>
+                <button class="time-slot" data-time="14:00">14:00</button>
+                <button class="time-slot unavailable" data-time="15:30" disabled>15:30 (Ocupado)</button>
+            </div>
+            <p class="total-price">Total Estimado: <span id="total-value">R$ 0,00</span></p>
+        </div>
+        
+        <button id="schedule-button" class="schedule-btn" disabled>Confirmar Agendamento</button>
+    </div>
+</div>
+<script src="../js/app.js"></script>
+</body>
+</html>

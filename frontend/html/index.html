@@ -1,115 +1,44 @@
-<h2>Agendar Novo Serviço</h2>
-<form id="appointmentForm">
-    
-    <label for="clientId">ID do Cliente:</label>
-    <input type="number" id="clientId" name="client_id" value="1" required><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Home</title>
+</head>
+<body>
 
-    <label for="startDateTime">Início do Agendamento:</label>
-    <input type="datetime-local" id="startDateTime" name="start_datetime_local" required><br><br>
+<header>
+    <div class="logo">
+        <a href="#"><img src="../img/logo.png" alt="Logo da Empresa"></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="servicos.html">Serviços</a></li>
+            <li><a href="agendamento.html">Agendamento</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
+    </nav>
+</header>
+    <div class="principal">
+        <h1>Bem Vindo(a)!</h1>
+        <p>Conheça nossos serviços e agende seu horário.</p>
 
-    <label for="endDateTime">Fim do Agendamento:</label>
-    <input type="datetime-local" id="endDateTime" name="end_datetime_local" required><br><br>
+        <!-- div link para agendamento -->
+        <a href="agendamento.html"><div class="agendamento">
+            <h2>Agendamento</h2>
+        </div></a>
 
-    <label>Serviços Desejados:</label><br>
-    <input type="checkbox" id="service1" name="service_ids" value="1"> 
-    <label for="service1">Corte Simples (ID 1)</label><br>
-    
-    <input type="checkbox" id="service2" name="service_ids" value="5">
-    <label for="service2">Pintura e Tratamento (ID 5)</label><br>
-    
-    <input type="checkbox" id="service3" name="service_ids" value="8">
-    <label for="service3">Massagem Capilar (ID 8)</label><br><br>
+        <!-- div link para serviços -->
+        <a href="servicos.html"><div class="servicos">
+            <h2>Serviços</h2>
+        </div></a>
 
-    <button type="submit">Confirmar Agendamento</button>
-</form>
-
-<p id="message" style="margin-top: 20px; font-weight: bold;"></p>
-
-<script>
-const API_URL = 'http://127.0.0.1:8000';
-const form = document.getElementById('appointmentForm');
-const messageElement = document.getElementById('message');
-
-// Adiciona um listener para interceptar o clique no botão de submit
-form.addEventListener('submit', function(event) {
-    event.preventDefault(); 
-    createAppointment();
-});
-
-// Função para coletar os IDs de todos os checkboxes marcados
-function getCheckedServiceIds() {
-    const checkboxes = document.querySelectorAll('input[name="service_ids"]:checked');
-    const serviceIds = [];
-    checkboxes.forEach(cb => {
-        serviceIds.push(parseInt(cb.value));
-    });
-    return serviceIds;
-}
-
-async function createAppointment() {
-    const formData = new FormData(form);
-    
-    // Coleta os valores do campo datetime-local (strings no formato "YYYY-MM-DDTHH:MM")
-    const startDateTimeLocal = formData.get('start_datetime_local');
-    const endDateTimeLocal = formData.get('end_datetime_local');
-    
-    // ⚠️ Conversão para ISO 8601 (String no formato "YYYY-MM-DDTHH:MM:SS.mmmZ")
-    // Este é o formato obrigatório que o Pydantic/FastAPI espera para o tipo 'datetime'.
-    const startDateTimeISO = startDateTimeLocal ? new Date(startDateTimeLocal).toISOString() : null;
-    const endDateTimeISO = endDateTimeLocal ? new Date(endDateTimeLocal).toISOString() : null;
-
-    const serviceIds = getCheckedServiceIds();
-
-    if (serviceIds.length === 0) {
-        messageElement.style.color = 'red';
-        messageElement.textContent = "❌ Por favor, selecione pelo menos um serviço.";
-        return;
-    }
-    
-    // Estrutura de dados que corresponde EXATAMENTE ao seu Schema Pydantic (AppointmentCreate)
-    const appointmentData = {
-        client_id: parseInt(formData.get('client_id')),
-        start_datetime: startDateTimeISO, 
-        end_datetime: endDateTimeISO,
-        service_ids: serviceIds 
-    };
-
-    try {
-        messageElement.textContent = "⌛ Enviando agendamento para a API...";
-        
-        const response = await fetch(`${API_URL}/appointments/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(appointmentData)
-        });
-
-        const result = await response.json();
-
-        if (response.ok) { // Status 201 Created
-            messageElement.style.color = 'green';
-            messageElement.innerHTML = `✅ **Agendamento Criado!**<br>
-                                        ID: ${result.id}<br>
-                                        Status: ${result.status}<br>
-                                        Início (UTC): ${result.start_datetime}`;
-            form.reset();
-        } else {
-            // Trata erros de validação (422 Unprocessable Entity) ou outros erros de servidor
-            messageElement.style.color = 'red';
-            const errorDetail = result.detail 
-                ? JSON.stringify(result.detail) 
-                : 'Erro desconhecido da API.';
-            
-            messageElement.innerHTML = `❌ **Falha ao Agendar (Status: ${response.status})**<br>
-                                        Detalhes: ${errorDetail}`;
-            console.error("Erro da API:", result);
-        }
-
-    } catch (error) {
-        messageElement.style.color = 'red';
-        messageElement.textContent = "❌ Erro de conexão com o servidor. Verifique se a API está rodando.";
-        console.error("Erro de conexão:", error);
-    }
-}
-</script>
+        <!-- div link para contato -->
+        <a href="contato.html"><div class="contato">
+            <h2>Contato</h2>
+        </div></a>
+    </div>
+</body>
+</html>

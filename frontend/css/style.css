@@ -1,0 +1,139 @@
+/* Paleta de Cores Sugerida:
+   - Fundo Principal: #121212 (Preto Quase Total)
+   - Texto Principal: #E0E0E0 (Branco Sujo/Cinza Claro)
+   - Destaque/Acento: #BB86FC (Roxo/Acento - Ou use #CF6679 Vermelho Antigo)
+   - Fundo Secundário: #1E1E1E (Cinza Escuro)
+   - Links/Hover: #FFD700 (Dourado/Bege - Ou use #BB86FC)
+*/
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif; /* Mantenha uma fonte legível, como 'Roboto', 'Oswald' ou 'sans-serif' */
+}
+
+body {
+    background-color: #121212; /* Fundo escuro principal */
+    color: #E0E0E0; /* Cor do texto principal (claro) */
+    line-height: 1.6;
+}
+
+/* --- Cabeçalho (Header) --- */
+header {
+    background-color: #000000; /* Preto sólido para o cabeçalho */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    border-bottom: 2px solid #FFD700; /* Linha de destaque dourada/bege */
+}
+
+.logo img {
+    height: 50px; /* Ajuste conforme o tamanho da sua logo */
+    filter: brightness(0) invert(1); /* Tenta deixar o logo claro se ele for escuro, ajuste se necessário */
+}
+
+/* --- Navegação (Nav) --- */
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #E0E0E0;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #000000; /* Cor do texto ao passar o mouse */
+    background-color: #FFD700; /* Fundo dourado/bege ao passar o mouse */
+    border-radius: 5px;
+}
+
+/* --- Conteúdo Principal (.principal) --- */
+.principal {
+    padding: 40px 5%;
+    text-align: center;
+}
+
+.principal h1 {
+    font-size: 2.5em;
+    color: #FFD700; /* Destaque para o título principal */
+    margin-bottom: 10px;
+}
+
+.principal p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+/* --- Seções de Link (Agendamento, Serviços, Contato) --- */
+
+/* Estilização dos links que envolvem as divs */
+.principal > a {
+    text-decoration: none; /* Remove sublinhado dos links */
+    display: inline-block; /* Permite que os blocos sejam lado a lado */
+    margin: 15px;
+    width: 300px; /* Largura das caixas */
+    height: 150px; /* Altura das caixas */
+}
+
+/* Estilização das divs internas */
+.principal .agendamento,
+.principal .servicos,
+.principal .contato {
+    background-color: #1E1E1E; /* Fundo cinza escuro para as caixas */
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    display: flex; /* Para centralizar o h2 */
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ocupa a altura do link pai */
+}
+
+.principal .agendamento h2,
+.principal .servicos h2,
+.principal .contato h2 {
+    color: #E0E0E0;
+    font-size: 1.5em;
+    text-transform: uppercase;
+}
+
+/* Efeito Hover nas caixas */
+.principal > a:hover .agendamento,
+.principal > a:hover .servicos,
+.principal > a:hover .contato {
+    transform: translateY(-5px); /* Efeito de elevação */
+    box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2); /* Sombra dourada suave */
+    background-color: #2a2a2a; /* Ligeiramente mais claro ao passar o mouse */
+}
+
+/* Destaque adicional para Agendamento */
+.principal .agendamento {
+    border-left: 5px solid #BB86FC; /* Borda lateral de destaque (Roxo ou Vermelho) */
+}
+
+/* Destaque adicional para Serviços */
+.principal .servicos {
+    border-bottom: 5px solid #FFD700; /* Borda inferior de destaque (Dourado) */
+}
+
+/* Destaque adicional para Contato */
+.principal .contato {
+    border-right: 5px solid #BB86FC; /* Borda lateral de destaque (Roxo ou Vermelho) */
+}
+
+/* O segundo .contato no HTML está incorreto. Se você quiser estilizar o conteúdo interno,
+   remova o segundo </div> antes de <h2>Contato</h2>, e a div vazia extra.
+   O código CSS acima ignora o segundo div.contato vazio. */
