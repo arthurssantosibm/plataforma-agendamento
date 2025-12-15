@@ -1,9 +1,8 @@
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
 from dotenv import load_dotenv
 import os
 
-# Importar componentes do SQLAlchemy
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base # Mudança para o novo nome de Base
 
 load_dotenv()
 
@@ -17,6 +16,14 @@ DATABASE_URL = (
 # 2. Criar o Motor (Engine)
 # O motor é o ponto de partida para qualquer interação com o banco de dados
 engine = create_engine(DATABASE_URL)
+
+
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
+
 
 # 3. Criar o Base
 # Base é a classe base para as declarações dos modelos
