@@ -1,14 +1,13 @@
 from app.core.database import SessionLocal
-from app.models.user import User
-
+from app.models.service import Service
 db = SessionLocal()
 
-users = db.query(User).all()
+Services = db.query(Service).all()
 
-print("📋 Lista de usuários:")
-for u in users:
+print("📋 Lista de serviços:")
+for s in Services:
     print(
-        f"ID: {u.id} | Nome: {u.name} | Email: {u.email} | Role: {u.role}"
+        f"ID: {s.id} | Nome: {s.name} | Duração: {s.duration_minutes} min | Buffer: {s.buffer_minutes} min | Preço: R$ {s.price}"
     )
 
 db.close()

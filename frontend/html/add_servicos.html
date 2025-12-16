@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Serviços</title>
+    <link rel="stylesheet" href="../css/style_add_servicos.css"> 
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="index.html"><img src="../img/logo.png" alt="Logo da Empresa"></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="servicos.html">Serviços</a></li>
+            <li><a href="agendamento.html">Agendamento</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="main-content">
+
+    <h1>Adicionar Serviço</h1>
+
+    <div class="service-form-container">
+        <input id="name" placeholder="Nome">
+        <input id="duration" placeholder="Duração (min)">
+        <input id="buffer" placeholder="Buffer (min)">
+        <input id="price" placeholder="Preço">
+        <button onclick="addService()">Salvar</button>
+    </div>
+    
+    <h2>Serviços cadastrados</h2>
+    <ul id="services-list"></ul>
+
+</div> 
+<script src="../js/service.js"></script>
+</body>
+</html>

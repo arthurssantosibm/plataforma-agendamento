@@ -1,0 +1,235 @@
+/* ======================================= */
+/* 1. RESET, REGRAS GLOBAIS E TEMA ESCURO */
+/* ======================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+/* Configuração do Tema Escuro em 100% da tela */
+html {
+    background-color: #121212;
+}
+
+body {
+    background-color: #121212; /* Fundo escuro principal */
+    color: #E0E0E0; /* Cor do texto principal (claro) */
+    line-height: 1.6;
+    min-height: 100vh; /* CRUCIAL: Garante que o body ocupe a altura total da tela */
+    display: flex; 
+    flex-direction: column;
+}
+
+/* --- Títulos Genéricos --- */
+h1 {
+    color: #FFD700;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 2.5em;
+    margin-top: 40px;
+}
+
+h2 {
+    color: #BB86FC;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333333;
+    padding-bottom: 5px;
+}
+
+/* --- Cabeçalho (Header) PADRÃO --- */
+header {
+    background-color: #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    border-bottom: 2px solid #FFD700;
+}
+
+.logo img {
+    height: 50px;
+}
+
+/* --- Navegação (Nav) PADRÃO --- */
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #E0E0E0;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #000000;
+    background-color: #FFD700;
+    border-radius: 5px;
+}
+
+/* --- Container de Conteúdo Principal (Usado em Home, Contato, Cadastro) --- */
+.principal, .main-content {
+    flex-grow: 1; /* Ocupa o espaço restante verticalmente */
+    max-width: 1200px;
+    margin: 0 auto; /* Centraliza o bloco de conteúdo horizontalmente */
+    padding: 0 5%;
+    width: 100%;
+}
+
+
+/* ======================================= */
+/* 2. ESTILOS PÁGINA DE AGENDAMENTO */
+/* ======================================= */
+
+.agendamento-page {
+    /* Herda .principal/.main-content */
+    padding: 40px 5%;
+    text-align: center;
+}
+
+.calendar-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #121212;
+    border-radius: 6px;
+    padding: 20px;
+}
+
+/* ... (O restante do CSS do calendário e modal segue aqui, não incluído para brevidade, mas deve ser mantido) ... */
+
+
+/* ======================================= */
+/* 3. ESTILOS PÁGINA DE CONTATO */
+/* ======================================= */
+
+.contato-page {
+    /* Herda .principal/.main-content */
+    text-align: left;
+}
+
+.contato-page h1, .contato-page .subtitle {
+    text-align: center;
+}
+
+.contact-container {
+    display: flex;
+    max-width: 1000px;
+    width: 90%;
+    margin: 40px auto;
+    gap: 30px;
+    padding: 20px;
+    background-color: #1E1E1E;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* ... (O restante do CSS do formulário de contato segue aqui) ... */
+
+
+/* ======================================= */
+/* 4. ESTILOS PÁGINA DE CADASTRO DE SERVIÇO */
+/* ======================================= */
+
+/* Estilos para o bloco de formulário da página de cadastro */
+.service-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #1E1E1E;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Estilo dos campos de input (para a página de cadastro) */
+.service-form-container input {
+    width: calc(50% - 10px); 
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #333333;
+    background-color: #2a2a2a;
+    color: #E0E0E0;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.service-form-container input:nth-child(2n-1) {
+    margin-right: 20px;
+}
+
+.service-form-container input:focus {
+    border-color: #FFD700;
+    outline: none;
+}
+
+/* Estilo do Botão Salvar (usado na página de cadastro) */
+.service-form-container button {
+    width: 100%; 
+    padding: 12px;
+    background-color: #FFD700;
+    color: #121212;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.service-form-container button:hover {
+    background-color: #BB86FC;
+}
+
+/* --- Estilos da Lista de Serviços Cadastrados --- */
+#services-list {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#services-list li {
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
+}
+
+/* Media Query para responsividade (Geral) */
+@media (max-width: 900px) {
+    .contact-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 650px) {
+    .service-form-container {
+        flex-direction: column;
+    }
+    .service-form-container input {
+        width: 100%;
+        margin-right: 0 !important;
+    }
+}
