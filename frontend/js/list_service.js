@@ -25,11 +25,6 @@ li.innerHTML = `
         Buffer: ${service.buffer_minutes} min |
         R$ ${service.price}
     </div>
-
-    <div class="service-actions">
-        <button class="edit-btn" onclick="editService(${service.id})">Editar</button>
-        <button class="delete-btn" onclick="deleteService(${service.id})">Deletar</button>
-    </div>
 `;
 
 

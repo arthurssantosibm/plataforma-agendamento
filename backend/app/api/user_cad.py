@@ -1,12 +1,10 @@
-from fastapi import APIRouter, Depends, HTTPException, FastAPI
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from passlib.context import CryptContext
 
 from app.core.database import get_db
 from app.models.user import User
-
-app = FastAPI(title='Plataforma de Agendamento')
 
 router = APIRouter(
     prefix="/users",

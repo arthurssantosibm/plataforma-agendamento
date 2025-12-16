@@ -15,3 +15,4 @@ def get_db():
 @router.get("/")
 def list_users(db: Session = Depends(get_db)):
     return db.query(User).all()
+
