@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from app.api.appointment_routes import router as appointment_router
 from app.api.service_routes import router as service_router
 
 app = FastAPI(title="Plataforma de Agendamento")
@@ -18,3 +18,4 @@ def health():
     return {"status": "ok"}
 
 app.include_router(service_router)
+app.include_router(appointment_router)
