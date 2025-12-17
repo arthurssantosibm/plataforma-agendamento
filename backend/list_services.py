@@ -10,7 +10,7 @@ def list_services():
             print("📭 Nenhum serviço encontrado.")
             return
 
-        print("\n🛠️ SERVIÇOS CADASTRADOS:")
+        print("\nSERVIÇOS CADASTRADOS:")
         for s in services:
             print("-" * 40)
             print(f"ID: {s.id}")

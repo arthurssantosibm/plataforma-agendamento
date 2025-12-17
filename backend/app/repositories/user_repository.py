@@ -1,19 +1,20 @@
 from sqlalchemy.orm import Session
 from app.models.user import User
+from app.schemas.user import UserCreate
 
-class UserRepository:
+def create_user(db: Session, data: UserCreate):
+    user = User(
+        name=data.name,
+        email=data.email,
+        password=data.password,  # depois a gente faz hash
+        phone=data.phone,
+        role=data.role
+    )
 
-    @staticmethod
-    def create(db: Session, user: User):
-        db.add(user)
-        db.commit()
-        db.refresh(user)
-        return user
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+    return user
 
-    @staticmethod
-    def get_all(db: Session):
-        return db.query(User).all()
-
-    @staticmethod
-    def get_by_email(db: Session, email: str):
-        return db.query(User).filter(User.email == email).first()
+def get_users(db: Session):
+    return db.query(User).all()
