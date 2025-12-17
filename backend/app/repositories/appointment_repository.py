@@ -1,6 +1,5 @@
 from sqlalchemy.orm import Session
 from datetime import timedelta
-
 from app.models.appointment import Appointment
 from app.models.appointment_service import AppointmentService
 from app.models.service import Service
@@ -10,14 +9,14 @@ def create_appointment(db: Session, data: AppointmentCreate):
     services = db.query(Service).filter(Service.id.in_(data.service_ids)).all()
 
     if len(services) != len(data.service_ids):
-        raise ValueError("Um ou mais serviços são inválidos")
+        raise ValueError("Serviço inválido")
 
-    total_duration = sum(
+    total_minutes = sum(
         s.duration_minutes + s.buffer_minutes for s in services
     )
 
     start = data.start_datetime
-    end = start + timedelta(minutes=total_duration)
+    end = start + timedelta(minutes=total_minutes)
 
     appointment = Appointment(
         client_id=data.client_id,
@@ -26,7 +25,7 @@ def create_appointment(db: Session, data: AppointmentCreate):
     )
 
     db.add(appointment)
-    db.flush()  # pega o appointment.id
+    db.flush()
 
     for service in services:
         db.add(
@@ -39,6 +38,7 @@ def create_appointment(db: Session, data: AppointmentCreate):
     db.commit()
     db.refresh(appointment)
     return appointment
+
 
 def get_appointments(db: Session):
     return db.query(Appointment).all()

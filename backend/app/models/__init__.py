@@ -6,3 +6,7 @@ from .appointment_service import AppointmentService
 from .working_hour import WorkingHour
 from .blocked_date import BlockedDate
 from .notification import Notification
+from .user import User
+from .service import Service
+from .appointment import Appointment
+from .appointment_service import AppointmentService

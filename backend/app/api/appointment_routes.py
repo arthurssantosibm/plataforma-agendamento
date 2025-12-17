@@ -10,12 +10,14 @@ from app.repositories.appointment_repository import (
 
 router = APIRouter(prefix="/appointments", tags=["Appointments"])
 
+
 def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
+
 
 @router.post("/", response_model=AppointmentResponse)
 def create(data: AppointmentCreate, db: Session = Depends(get_db)):
@@ -33,6 +35,7 @@ def create(data: AppointmentCreate, db: Session = Depends(get_db)):
         created_at=appointment.created_at,
         service_ids=[s.service_id for s in appointment.services]
     )
+
 
 @router.get("/", response_model=list[AppointmentResponse])
 def list_all(db: Session = Depends(get_db)):
