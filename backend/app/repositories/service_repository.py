@@ -1,16 +1,16 @@
-from sqlalchemy.orm import Session
 from app.models.service import Service
-from backend.app.schemas.service_schema import ServiceCreate
+from sqlalchemy.orm import Session
+from app.schemas.service import ServiceCreate, ServiceUpdate
 
-class ServiceRepository:
-    @staticmethod
-    def create(db: Session, service_data: ServiceCreate):
-        service = Service(**service_data.dict())
-        db.add(service)
-        db.commit()
-        db.refresh(service)
-        return service
-    
-    @staticmethod
-    def get_all(db: Session):
-        return db.query(Service).filter(Service.active == True).all()
+def update_service(db: Session, service_id: int, service_data: ServiceUpdate):
+    service = db.query(Service).filter(Service.id == service_id).first()
+
+    if not service:
+        return None
+
+    for field, value in service_data.dict(exclude_unset=True).items():
+        setattr(service, field, value)
+
+    db.commit()
+    db.refresh(service)
+    return service
