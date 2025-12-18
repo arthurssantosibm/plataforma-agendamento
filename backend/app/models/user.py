@@ -13,7 +13,6 @@ class User(Base):
     phone = Column(String(20))
     role = Column(String(20), nullable=False)  # admin | client
     created_at = Column(DateTime, default=datetime.utcnow)
-
     addresses = relationship("Address", back_populates="user")
     appointments = relationship("Appointment", back_populates="client")
     notifications = relationship("Notification", back_populates="user")

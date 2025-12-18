@@ -58,3 +58,14 @@ def delete(service_id: int, db: Session = Depends(get_db)):
     if not service:
         raise HTTPException(status_code=404, detail="Serviço não encontrado")
     return {"message": "Serviço removido"}
+
+@router.post("/", response_model=ServiceResponse)
+def create(
+    data: ServiceCreate, 
+    db: Session = Depends(get_db)
+):
+    service = create_service(db, data)
+    return service
+
+
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Barbearia XYZ</title>
+    <link rel="stylesheet" href="../css/style_auth.css"> 
+</head>
+<body>
+
+<main class="auth-container">
+    <div class="auth-card">
+        <h1>Crie Sua Conta</h1>
+        <p>Preencha os dados para agendar seus serviços.</p>
+
+        <form id="register-form">
+            <div class="form-group">
+                <label for="name">Nome Completo *</label>
+                <input type="text" id="name" required>  
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Telefone (Opcional)</label>
+                <input type="tel" id="phone">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha *</label>
+                <input type="password" id="password" required>
+            </div>
+
+            <button type="submit" class="auth-button">Cadastrar</button>
+        </form>
+
+        <p class="auth-switch">Já tem conta? <a href="login.html">Faça Login</a></p>
+    </div>
+</main>
+
+<script src="../js/register.js"></script>
+</body>
+</html>

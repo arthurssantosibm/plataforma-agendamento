@@ -14,7 +14,8 @@ html {
 }
 
 body {
-    background-color: #121212; 
+    background: #000000;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 12%, rgba(163, 138, 62, 1) 70%, rgba(212, 175, 55, 1) 100%);
     color: #E0E0E0; 
     line-height: 1.6;
     min-height: 100vh; 
@@ -200,4 +201,13 @@ nav ul li a:hover {
     font-size: 15px;
     color: #ffffff;
 }
-
+.schedule-button{
+    padding: 10px 15px;
+    z-index: 1;
+}
+.schedule-button:hover{
+    background-color: #BB86FC;
+    cursor: pointer;
+    color: #ffffff;
+    transition: background-color 0.5s ease-in-out;
+}

@@ -38,5 +38,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 4. entrar na pasta backend e ativar o ambiente virtual:
 venv/Scripts/activate
 
-5. rodar a api:
+5. verificar se o main.py está na pasta app
+
+6. rodar a api:
 uvicorn app.main:app --reload

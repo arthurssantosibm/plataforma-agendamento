@@ -15,15 +15,15 @@ html {
 }
 
 body {
-    background-color: #121212; /* Fundo escuro principal */
-    color: #E0E0E0; /* Cor do texto principal (claro) */
+    background: #000000;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 12%, rgba(163, 138, 62, 1) 70%, rgba(212, 175, 55, 1) 100%);
+    color: #E0E0E0; 
     line-height: 1.6;
-    min-height: 100vh; /* CRUCIAL: Garante que o body ocupe a altura total da tela */
+    min-height: 100vh;
     display: flex; 
     flex-direction: column;
 }
 
-/* --- Títulos Genéricos --- */
 h1 {
     color: #FFD700;
     margin-bottom: 20px;
@@ -33,7 +33,7 @@ h1 {
 }
 
 h2 {
-    color: #BB86FC;
+    color: #FFD700;
     margin-top: 40px;
     margin-bottom: 15px;
     border-bottom: 1px solid #333333;
@@ -145,7 +145,7 @@ nav ul li a:hover {
 .service-form-container {
     max-width: 600px;
     margin: 0 auto;
-    background-color: #1E1E1E;
+    background-color: #0f0f0f;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
@@ -232,4 +232,15 @@ nav ul li a:hover {
         width: 100%;
         margin-right: 0 !important;
     }
+}
+.edit-btn, .delete-btn {
+    background-color: #FFD700;
+    color: #121212;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s;
 }

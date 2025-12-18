@@ -15,7 +15,8 @@ html {
 }
 
 body {
-    background-color: #121212; /* Fundo escuro principal */
+    background: #000000;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 12%, rgba(163, 138, 62, 1) 70%, rgba(212, 175, 55, 1) 100%); /* Fundo escuro principal */
     color: #E0E0E0; /* Cor do texto principal (claro) */
     line-height: 1.6;
     min-height: 100vh; /* CRUCIAL: Garante que o body ocupe a altura total da tela */
@@ -95,9 +96,10 @@ nav ul li a:hover {
     width: 90%;
     gap: 30px;
     padding: 20px;
-    background-color: #1E1E1E;
+    background-color: #000000;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    margin-left: 70px;
 }
 
 .contact-form-section,
