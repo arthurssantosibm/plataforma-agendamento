@@ -3,7 +3,7 @@ Para criar o ambiente virtual:
 1. montar a estrutura de pastas correta -->
 
 ├── main.py
-├── .env (com os dados de conexao do banco na raiz do projeto
+├── .env (com os dados de conexao do banco na raiz do )
 │
 ├── app/
 │   ├── __init__.py
