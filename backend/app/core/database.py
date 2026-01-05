@@ -45,6 +45,6 @@ def get_db():
 if __name__ == "__main__":
     try:
         with engine.connect() as conn:
-            print("✅ Conexão via SQLAlchemy com PostgreSQL (AWS) realizada com sucesso!")
+            print("Conexão via SQLAlchemy com PostgreSQL (AWS) realizada com sucesso!")
     except Exception as e:
-        print("❌ Erro ao conectar no banco:", e)
+        print("Erro ao conectar no banco:", e)

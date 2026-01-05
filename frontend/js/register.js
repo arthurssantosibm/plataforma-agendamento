@@ -8,20 +8,13 @@ async function handleRegister(event) {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const phone = document.getElementById('phone').value; 
-    
-    // --- PAYLOAD DE ENTRADA (INPUT) CORRETO ---
     const payload = {
-        // 1. Campos obrigatórios no seu modelo de DB:
         name: name,
         email: email,
         password: password, 
         role: "client",
-        
-        // 2. Campo opcional no seu modelo de DB:
-        // Garante que envia string se preenchido, ou null se vazio.
         phone: phone.trim() === '' ? null : phone, 
     };
-    // ------------------------------------------
 
     const button = registerForm.querySelector('button');
     button.disabled = true;
@@ -33,8 +26,6 @@ async function handleRegister(event) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
-        
-        // ... (Restante do tratamento de erro/sucesso robusto que definimos anteriormente) ...
 
         if (response.ok) {
             alert("Cadastro realizado com sucesso! Faça login para continuar.");

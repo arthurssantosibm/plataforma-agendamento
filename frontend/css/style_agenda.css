@@ -64,7 +64,13 @@ nav ul li a:hover {
     background-color: #FFD700;
     border-radius: 5px;
 }
-
+input {
+    background-color: #1E1E1E;
+    color: #E0E0E0;
+    padding: 8px;
+    border: 1px solid #333333;
+    width: 100%;
+}
 /* --- Conteúdo Principal (.principal) --- */
 /* Garante que a área de conteúdo se estique e empurre o que estiver abaixo (ex: rodapé) */
 .principal {

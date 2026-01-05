@@ -1,7 +1,5 @@
-// --- 1. CONFIGURAÇÃO DA API ---
 const API_URL = "http://127.0.0.1:8000/services/"; 
 
-// --- 2. VARIÁVEIS DO CALENDÁRIO ---
 const calendarGrid = document.getElementById('calendar-grid');
 const currentMonthYearHeader = document.getElementById('current-month-year');
 const prevMonthButton = document.getElementById('prev-month');
@@ -11,9 +9,7 @@ const dateDisplay = document.getElementById('selected-date-display');
 const modal = document.getElementById('appointment-modal');
 const closeModalButton = document.querySelector('.close-button');
 
-let currentDisplayDate = new Date(); // Inicia com a data atual
-
-// --- 3. LÓGICA DE CARREGAMENTO DE SERVIÇOS (Preenche o Select) ---
+let currentDisplayDate = new Date();
 
 async function loadServicesIntoSelect() {
     try {
@@ -23,13 +19,10 @@ async function loadServicesIntoSelect() {
         }
         
         const services = await response.json();
-        
-        // Limpa as opções existentes (exceto a primeira "Selecione...")
         serviceSelect.innerHTML = '<option value="0">Selecione um Serviço</option>';
 
         services.forEach(service => {
             const option = document.createElement('option');
-            // Armazena o ID do serviço e o nome/preço na interface
             option.value = service.id; 
             option.setAttribute('data-duration', service.duration_minutes);
             option.setAttribute('data-price', service.price);
@@ -39,7 +32,6 @@ async function loadServicesIntoSelect() {
 
     } catch (error) {
         console.error("Erro ao carregar serviços:", error);
-        // Adiciona uma opção de erro no select para feedback
         const errorOption = document.createElement('option');
         errorOption.textContent = 'Erro ao carregar serviços.';
         errorOption.disabled = true;
@@ -48,13 +40,10 @@ async function loadServicesIntoSelect() {
 }
 
 function renderCalendar() {
-    // Limpa o grid
     calendarGrid.innerHTML = ''; 
 
     const year = currentDisplayDate.getFullYear();
-    const month = currentDisplayDate.getMonth(); // 0 = Janeiro, 11 = Dezembro
-    
-    // Atualiza o cabeçalho
+    const month = currentDisplayDate.getMonth();
     const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
                         "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
     currentMonthYearHeader.textContent = `${monthNames[month]} ${year}`;
@@ -81,12 +70,10 @@ function renderCalendar() {
         dayDiv.className = 'day day-available';
         dayDiv.setAttribute('data-date', dateString);
         
-        // Marca o dia atual
         if (date.getTime() === today.getTime()) {
             dayDiv.classList.add('today');
         }
         
-        // Adiciona um evento de clique para abrir o modal
         dayDiv.addEventListener('click', () => openAppointmentModal(dateString));
         
         calendarGrid.appendChild(dayDiv);
@@ -94,19 +81,12 @@ function renderCalendar() {
 }
 
 function selectTime(button, time) {
-    // 1. Remove a seleção de todos os outros botões
-    // Procura por todos os botões com a classe 'time-slot' e remove a classe 'selected'
     document.querySelectorAll('.time-slot').forEach(btn => {
         btn.classList.remove('selected');
     });
     
-    // 2. Adiciona a seleção ao botão clicado
     button.classList.add('selected');
-
-    // 3. Atualiza as variáveis de estado
     selectedTime = time;
-    
-    // 4. Habilita o botão de agendamento final
     scheduleButton.disabled = false;
 }
 
@@ -116,7 +96,6 @@ function goToNextMonth() {
 }
 
 function goToPrevMonth() {
-    // Evita voltar para meses passados se for o mês atual
     const today = new Date();
     if (currentDisplayDate.getFullYear() === today.getFullYear() && currentDisplayDate.getMonth() === today.getMonth()) {
         return; 
@@ -127,30 +106,19 @@ function goToPrevMonth() {
 }
 
 function openAppointmentModal(dateString) {
-    // Formata a data para exibição no modal
     const [year, month, day] = dateString.split('-');
     dateDisplay.textContent = `${day}/${month}/${year}`;
-    
-    // Mostra o modal
     modal.style.display = 'block';
-    
-    // TODO: Aqui você faria uma chamada para a API para buscar horários disponíveis para 'dateString'
-    // Por enquanto, os horários estão estáticos no HTML.
 }
 
 function closeModal() {
     modal.style.display = 'none';
-    // Opcional: Limpar seleções ao fechar
     serviceSelect.value = '0';
     document.getElementById('total-value').textContent = 'R$ 0,00';
 }
 
-
-// Navegação do calendário
 prevMonthButton.addEventListener('click', goToPrevMonth);
 nextMonthButton.addEventListener('click', goToNextMonth);
-
-// Fechar modal
 closeModalButton.addEventListener('click', closeModal);
 window.addEventListener('click', (event) => {
     if (event.target === modal) {
@@ -158,7 +126,6 @@ window.addEventListener('click', (event) => {
     }
 });
 
-// Inicialização: carrega serviços e renderiza o mês atual
 window.onload = () => {
     loadServicesIntoSelect();
     renderCalendar();

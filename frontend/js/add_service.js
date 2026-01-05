@@ -1,14 +1,9 @@
 const API_URL = "http://127.0.0.1:8000/services/"; 
 
-// Variável global para rastrear o ID do serviço que está sendo editado
 let currentEditingId = null; 
 
-// Obtém a referência do botão principal do formulário
 const saveButton = document.querySelector('.service-form-container button');
 
-/**
- * Funções de Utilidade para Form e Botão
- */
 function setFormMode(mode, serviceId = null) {
     currentEditingId = serviceId;
     
@@ -26,11 +21,8 @@ function setFormMode(mode, serviceId = null) {
 }
 
 
-/**
- * 1. FUNÇÃO DE CRIAÇÃO (POST)
- */
 async function addService() {
-    if (currentEditingId !== null) return; // Garante que não está no modo de edição
+    if (currentEditingId !== null) return; 
 
     const name = document.getElementById('name').value;
     const duration = document.getElementById('duration').value;
@@ -57,7 +49,7 @@ async function addService() {
         }
 
         alert("Serviço cadastrado com sucesso!");
-        setFormMode('add'); // Limpa o formulário
+        setFormMode('add');
         loadServices();
 
     } catch (error) {
@@ -66,13 +58,8 @@ async function addService() {
     }
 }
 
-
-/**
- * 2. FUNÇÃO DE EDIÇÃO (GET e PUT/PATCH)
- */
 async function editService(serviceId) {
     try {
-        // 1. GET: Busca os dados do serviço
         const response = await fetch(`${API_URL}${serviceId}`); 
         
         if (!response.ok) {
@@ -80,14 +67,10 @@ async function editService(serviceId) {
         }
         
         const service = await response.json();
-
-        // 2. Preenche o formulário
         document.getElementById('name').value = service.name;
         document.getElementById('duration').value = service.duration_minutes;
         document.getElementById('buffer').value = service.buffer_minutes;
         document.getElementById('price').value = service.price;
-
-        // 3. Altera o modo do formulário para edição
         setFormMode('edit', serviceId); 
         
         alert(`Editando serviço: ${service.name}. Altere os campos e clique em 'Salvar Edição'.`);
@@ -98,9 +81,6 @@ async function editService(serviceId) {
     }
 }
 
-/**
- * 3. FUNÇÃO DE SUBMISSÃO DA EDIÇÃO (PUT/PATCH)
- */
 async function submitEdit() {
     if (currentEditingId === null) return; 
 
@@ -117,9 +97,8 @@ async function submitEdit() {
     };
 
     try {
-        // PUT/PATCH: Envia os dados atualizados
         const response = await fetch(`${API_URL}${currentEditingId}`, {
-            method: "PUT", // Use PUT ou PATCH conforme a sua API
+            method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
@@ -130,7 +109,7 @@ async function submitEdit() {
         }
 
         alert("Serviço atualizado com sucesso!");
-        setFormMode('add'); // Reverte o formulário para o modo "Adicionar"
+        setFormMode('add'); 
         loadServices(); 
         
     } catch (error) {
@@ -139,10 +118,6 @@ async function submitEdit() {
     }
 }
 
-
-/**
- * 4. FUNÇÃO DE DELEÇÃO (DELETE)
- */
 async function deleteService(serviceId) {
     if (!confirm(`Tem certeza que deseja deletar o serviço ID ${serviceId}? Esta ação é irreversível.`)) {
         return; 
@@ -159,7 +134,7 @@ async function deleteService(serviceId) {
         }
 
         alert(`Serviço ID ${serviceId} deletado com sucesso!`);
-        loadServices(); // Recarrega a lista
+        loadServices();
 
     } catch (error) {
         console.error("Erro na função deleteService:", error);
@@ -167,11 +142,6 @@ async function deleteService(serviceId) {
     }
 }
 
-
-/**
- * 5. FUNÇÃO DE CARREGAMENTO (GET - Listagem)
- * Esta função foi modificada para incluir os botões de Ação.
- */
 async function loadServices() {
     try {
         const response = await fetch(API_URL);
@@ -189,7 +159,6 @@ async function loadServices() {
             const li = document.createElement("li");
             li.className = "service-item-row"; 
 
-            // Criando a estrutura com os botões e o ID do serviço
             li.innerHTML = `
                 <div class="service-info">
                     ${service.name} — ${service.duration_minutes} min — R$ ${service.price.toFixed(2)}
@@ -213,7 +182,6 @@ async function loadServices() {
     }
 }
 
-// Inicializa o modo do formulário e carrega os serviços
 window.onload = () => {
     setFormMode('add');
     loadServices();

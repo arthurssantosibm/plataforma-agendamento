@@ -1,10 +1,7 @@
-const LOGIN_API_URL = "http://127.0.0.1:8000/users"; 
+const LOGIN_API_URL = "http://127.0.0.1:8000/users/login/"; 
 const loginForm = document.getElementById('login-form');
-const NEXT_PAGE = 'agendamento.html'; // Página para onde redirecionar após o login
+const NEXT_PAGE = 'index.html';
 
-/**
- * Lida com o envio do formulário de login e salva o token de autenticação.
- */
 async function handleLogin(event) {
     event.preventDefault();
 
@@ -12,7 +9,7 @@ async function handleLogin(event) {
     const password = document.getElementById('login-password').value;
 
     const payload = {
-        email: email,
+        email: email, 
         password: password
     };
 
@@ -30,27 +27,15 @@ async function handleLogin(event) {
         const data = await response.json();
 
         if (response.ok) {
-            // --- O SUCESSO DO LOGIN DEPENDE DA SUA API: ---
-            
-            // 1. Armazenar o Token (Chave de Autenticação)
-            const token = data.access_token; 
-            if (token) {
-                // SALVA O TOKEN NO LOCAL STORAGE (ou Cookies, se preferir)
-                localStorage.setItem('authToken', token);
-                
-                // Opcional: Armazenar o ID ou nome do usuário
-                localStorage.setItem('userId', data.user_id); 
-                
+            if (data.id) {
+                localStorage.setItem('userId', data.id); 
                 alert("Login realizado com sucesso!");
-                window.location.href = 'index.html'
+                window.location.href = NEXT_PAGE; 
             } else {
-                throw new Error("Sucesso no login, mas token não recebido.");
+                throw new Error("Sucesso no login, mas dados de usuário incompletos.");
             }
-            // ------------------------------------------------
-            
         } else {
-            // Erro de credenciais inválidas ou usuário não encontrado
-            alert(`Falha no Login: ${data.detail || 'Email ou senha incorretos'}`);
+            alert(`Falha no Login: ${data.detail || 'Erro desconhecido.'}`);
         }
 
     } catch (error) {
