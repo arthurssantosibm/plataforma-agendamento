@@ -12,7 +12,7 @@ class Service(Base):
     price = Column(Float)
     active = Column(Boolean, default=True)
 
-    #appointments = relationship(
-    #    "AppointmentService", 
-    #   back_populates="service",
-    #    cascade="all, delete-orphan")
+    appointments = relationship(
+        "AppointmentService", 
+        back_populates="service",
+        cascade="all, delete-orphan")
