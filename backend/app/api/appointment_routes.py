@@ -1,15 +1,14 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
-
-from app.core.database import SessionLocal
+from datetime import datetime
+from app.core.database import SessionLocal 
+from app.models.appointment import Appointment
 from app.schemas.appointment import AppointmentCreate, AppointmentResponse
-from app.repositories.appointment_repository import (
-    create_appointment,
-    get_appointments
+
+router = APIRouter(
+    prefix="/appointments",
+    tags=["Agendamentos"]
 )
-
-router = APIRouter(prefix="/appointments", tags=["Appointments"])
-
 
 def get_db():
     db = SessionLocal()
@@ -18,38 +17,31 @@ def get_db():
     finally:
         db.close()
 
-
-@router.post("/", response_model=AppointmentResponse)
-def create(data: AppointmentCreate, db: Session = Depends(get_db)):
-    try:
-        appointment = create_appointment(db, data)
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-    return AppointmentResponse(
-        id=appointment.id,
-        client_id=appointment.client_id,
-        start_datetime=appointment.start_datetime,
-        end_datetime=appointment.end_datetime,
-        status=appointment.status,
-        created_at=appointment.created_at,
-        service_ids=[s.service_id for s in appointment.services]
+@router.post("/", response_model=AppointmentResponse, status_code=status.HTTP_201_CREATED)
+def create_appointment(
+    appointment_data: AppointmentCreate, 
+    db: Session = Depends(get_db)
+):
+    new_appointment = Appointment(
+        service=appointment_data.service,
+        client_email=appointment_data.client_email,
+        time=appointment_data.time,
+        status="scheduled"
     )
-
+    try:
+        db.add(new_appointment)
+        db.commit()
+        db.refresh(new_appointment)
+        return new_appointment
+        
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Não foi possível salvar o agendamento no banco de dados."
+        )
 
 @router.get("/", response_model=list[AppointmentResponse])
-def list_all(db: Session = Depends(get_db)):
-    appointments = get_appointments(db)
-
-    return [
-        AppointmentResponse(
-            id=a.id,
-            client_id=a.client_id,
-            start_datetime=a.start_datetime,
-            end_datetime=a.end_datetime,
-            status=a.status,
-            created_at=a.created_at,
-            service_ids=[s.service_id for s in a.services]
-        )
-        for a in appointments
-    ]
+def read_appointments(db: Session = Depends(get_db)):
+    appointments = db.query(Appointment).all()
+    return appointments

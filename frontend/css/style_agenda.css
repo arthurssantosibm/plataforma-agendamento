@@ -269,11 +269,26 @@ input {
 }
 
 /* Slots de Horário */
-.time-slots {
+.client_email {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 10px;
+}
+.time_avaliable {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    background-color:#1E1E1E;
+    color: #E0E0E0;
+    font-size: 1em;
 }
 
 .time-slot {
