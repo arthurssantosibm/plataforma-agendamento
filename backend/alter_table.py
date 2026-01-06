@@ -8,7 +8,7 @@ db = SessionLocal()
 
 def drop_appointments_table(engine):
     try:
-        Appointment.__table__.drop(db.bind, checkfirst=True)
+        Appointment.__table__.drop_all(db.bind, checkfirst=True)
         print("Tabela 'appointments' removida com sucesso.")
     except Exception as e:
         print(f"Erro ao remover a tabela 'appointments': {e}")

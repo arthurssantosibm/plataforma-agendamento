@@ -7,7 +7,7 @@ def create_user(db: Session, data: UserCreate):
     user = User(
         name=data.name,
         email=data.email,
-        password=data.password,  # depois a gente faz hash
+        password=data.password, 
         phone=data.phone,
         role=data.role
     )

@@ -7,7 +7,7 @@ class UserCreate(BaseModel):
     email: EmailStr
     password: str
     phone: Optional[str] = None
-    role: str  # admin | client
+    role: str
 
 class UserResponse(BaseModel):
     id: int

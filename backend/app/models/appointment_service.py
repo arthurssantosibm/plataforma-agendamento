@@ -8,5 +8,6 @@ class AppointmentService(Base):
     id = Column(Integer, primary_key=True)
     appointment_id = Column(Integer, ForeignKey("appointments.id"), nullable=False)
     service_id = Column(Integer, ForeignKey("services.id"), nullable=False)
+
     appointment = relationship("Appointment", back_populates="services")
     service = relationship("Service", back_populates="appointments")
